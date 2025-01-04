@@ -45,6 +45,14 @@ void Subject::Notify(const Entity &entity, Event event)
   }
 }
 
+void Subject::NotifyDestroy()
+{
+  for(auto &observer : observers_)
+  {
+    observer->ReceiveSubjectDestroyed();
+  }
+}
+
 void Physics::UpdateEntity(Entity &entity)
 {
   bool wasOnSurface = entity.IsOnSurface();
@@ -56,3 +64,5 @@ void Physics::UpdateEntity(Entity &entity)
     Notify(entity, Event::kEVENT_START_FALL);
   }
 }
+
+

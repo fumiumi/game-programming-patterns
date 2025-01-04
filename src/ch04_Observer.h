@@ -34,17 +34,32 @@ public:
 class Observer
 {
 public:
-  virtual ~Observer() {}
+  virtual ~Observer() {
+    subject_->RemoveObserver(this);
+  }
   virtual void OnNotify(const Entity &entity, Event event) = 0;
+  void ReceiveSubjectDestroyed()
+  {
+    isSubjectExist_ = false;
+  }
+
+private:
+  Subject * subject_;
+  bool isSubjectExist_;
 };
 
-// サブジェクトの役割：
-// 1. オブザーバーのリストを保持する
-// 2. リストを変更するためのAPIを提供する
-// 3. オブザーバーに通知を送信する
 class Subject
 {
 public:
+  ~Subject()
+  {
+    // まずは全 Observer に「もう削除するよ」と伝える
+    NotifyDestroy();
+
+    // 全ての unique_ptr<Observer> を解放する
+    // Observer のデストラクタが呼ばれるが、observer 側で subject_ = nullptr 済みになっていれば安全
+    observers_.clear();
+  }
   void AddObserver(Observer *observer);
   void RemoveObserver(Observer *observer);
 
@@ -52,6 +67,7 @@ protected:
   void Notify(const Entity &entity, Event event);
 
 private:
+  void NotifyDestroy();
   std::list<std::unique_ptr<Observer>> observers_;
 };
 
