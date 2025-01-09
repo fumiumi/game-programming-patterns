@@ -1,0 +1,23 @@
+{
+  "monststers":[
+    {
+      "name": "goblin grunt",
+      "minHealth": 20,
+      "maxHealth": 30,
+      "resists": ["cold", "poison"],
+      "weaknesses": ["fire"]
+    },
+    {
+      "name": "goblin wizard",
+      "prototype": "goblin grunt",
+      "spells": ["fireball", "lightning bolt"]
+    },
+    {
+      "name": "goblin king",
+      "prototype": "goblin grunt",
+      "minHealth": 50,
+      "maxHealth": 60,
+      "spells": ["fireball", "lightning bolt", "summon goblin grunt"]
+    }
+  ]
+}
