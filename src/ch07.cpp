@@ -124,3 +124,64 @@ void Heroine::HandleInput(Input input)
     }
   }
 }
+
+// 条件分岐も状態ベースで行うほうがFSMらしい
+void Heroine::HandleInput(Input input)
+{
+  switch(state_)
+  {
+    case State::STATE_STANDING:
+      if(input == Input::PRESS_B)
+      {
+        // ジャンプ状態に遷移
+        state_ = State::STATE_JUMPING;
+        velocity_x_ = JUMP_VELOCITY;
+        SetGraph(IMAGE_JUMP);
+      }
+      else if(input == Input::PRESS_DOWN)
+      {
+        // 屈み状態に遷移
+        state_ = State::STATE_DUCKING;
+        SetGraph(IMAGE_DUCK);
+      }
+      break;
+      
+      //その他の状態
+  }
+}
+
+// 今度は時間変化する要素の追加を考える
+void Heroine::Update()
+{
+  if(state_ == State::STATE_DUCKING)
+  {
+    charge_time_++;
+    if(charge_time_ > 100)
+    {
+      SuperBomb();
+    }
+  }
+}
+
+void Heroine::HandleInput(Input input)
+{
+  switch(state_)
+  {
+    case State::STATE_STANDING:
+      if(input == Input::PRESS_B)
+      {
+        //.,,
+      }
+      else if(input == Input::PRESS_DOWN)
+      {
+        // 屈み状態に遷移
+        state_ = State::STATE_DUCKING;
+        charge_time_ = 0;
+        SetGraph(IMAGE_DUCK);
+      }
+      //...
+      break;
+      
+      //その他の状態
+  }
+}

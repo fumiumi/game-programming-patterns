@@ -1,6 +1,14 @@
 #pragma once
 #include <string>
 
+enum State
+{
+  STATE_STANDING,
+  STATE_JUMPING,
+  STATE_DUCKING,
+  STATE_DIVING
+};
+
 class Heroine
 {
 public:
@@ -26,6 +34,8 @@ public:
   void SetGraph(std::string graph_path);
 
   void Jump();
+
+  void SuperBomb();
   
 private:
   int pos_x_;
@@ -34,4 +44,6 @@ private:
   int velocity_y_;
   bool is_jumping_;
   bool is_ducking_;
+  State state_;
+  int charge_time_;
 };
