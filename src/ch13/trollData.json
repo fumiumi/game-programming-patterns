@@ -1,0 +1,16 @@
+{
+  "Troll": {
+    "health": 25,
+    "attack": "巨人が攻撃した！"
+  },
+  "Troll Archer": {
+    "parent": "Troll",
+    "health": 0,
+    "attack": "巨人の射手が矢を放った！"
+  },
+  "Troll Wizard": {
+    "parent": "Troll",
+    "health": 0,
+    "attack": "巨人の魔法使いが呪文を唱えた！"
+  }
+}

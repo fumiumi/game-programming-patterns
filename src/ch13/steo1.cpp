@@ -24,7 +24,7 @@ class Monster
       breed_(breed)
     {}
 
-    cont char *getAttack() const { return breed_.getAttack(); }
+    const char *getAttack() const { return breed_.getAttack(); }
 
   private:
     int health_;

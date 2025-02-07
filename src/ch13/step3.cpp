@@ -50,3 +50,29 @@ private:
   int health_;
   const char *attacK_;
 };
+
+// 何を継承して、何をオーバーライドするか決める
+// 方法１：実行時に動的に決める
+int Breed::getHealth()
+{
+  // オーバーライド
+  if(health_ != 0 || parent_ == nullptr)
+  {
+    return health_;
+  }
+
+  // 継承
+  return parent_->getHealth();
+}
+
+const char *Breed::getAttack()
+{
+  // オーバーライド
+  if(attack_ != nullptr || parent_ == nullptr)
+  {
+    return attack_;
+  }
+
+  // 継承
+  return parent_->getAttack();
+}
