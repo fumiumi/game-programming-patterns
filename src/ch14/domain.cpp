@@ -93,7 +93,7 @@ public:
     inputComponent_.update(*this);
     physicsComponent_.update(*this, world);
     graphicsComponent_.update(*this, graphics);
-  };=
+  };
 
 private:
   InputComponent inputComponent_;
